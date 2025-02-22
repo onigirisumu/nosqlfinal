@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Jewelry Store</title>
+  <link rel="stylesheet" href="/home.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>Jewelry Store</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <% if (user) { %>
+            <% if (user.role === 'admin') { %>
+              <li><a href="/admin/users">Admin Panel</a></li>
+            <% } else { %>
+              <li><a href="/profile">Profile</a></li>
+            <% } %>
+            <li><a href="/signout">Sign Out</a></li>
+          <% } else { %>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/signin">Sign In</a></li>
+          <% } %>
+          <li><a href="/order" class="order-btn">Order</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+   
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Replace with your actual hero image path -->
+    <img src="/images/pexels-ulasch-30821139.jpg" alt="Jewelry Hero Image" class="hero-image">
+    <div class="hero-text">
+      <h2>Discover Exquisite Jewelry</h2>
+      <p>Experience the elegance and brilliance of our exclusive collection, where each piece is a masterpiece that tells a unique story of craftsmanship and passion.</p>
+    </div>
+  </section>
+  
+  <!-- Main Introduction -->
+  <main>
+    <div class="container">
+      <h2>Welcome to our Jewelry Store</h2>
+      <p>
+        At Jewelry Store, we believe that jewelry is not just an accessory—it’s a celebration of life's special moments and a reflection of your unique personality. Our carefully curated collection features handcrafted pieces that blend timeless tradition with modern innovation.
+      </p>
+      <p>
+        Every design is meticulously crafted using the finest materials, ensuring that each piece is not only a work of art but also a lasting symbol of love, success, or personal expression. Whether you are looking for a statement piece for a special occasion or an everyday treasure, our collection is designed to inspire and delight.
+      </p>
+      <p>
+        Our commitment to quality and authenticity means that every piece in our collection is ethically sourced and crafted by skilled artisans. We invite you to explore our range, discover your style, and let our jewelry become a cherished part of your story.
+      </p>
+    </div>
+  </main>
+  
+  <!-- Gallery Section -->
+  <section class="gallery">
+    <div class="container">
+      <h2>Our Collection Highlights</h2>
+      <div class="gallery-items">
+        <div class="gallery-item">
+          <img src="/images/pexels-kevinshrmasc-30774966.jpg" alt="Artisan Jewelry 1">
+          <h3>Artisan Elegance</h3>
+          <p>
+            Immerse yourself in the delicate balance of tradition and innovation. Our artisan pieces are crafted with precision and care, capturing the essence of beauty in every detail.
+          </p>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/pexels-matvalina-25841744.jpg" alt="Artisan Jewelry 2">
+          <h3>Modern Craftsmanship</h3>
+          <p>
+            Embrace the fusion of modern design and timeless charm. Our modern collection is a bold statement of sophistication, designed to complement the contemporary lifestyle.
+          </p>
+        </div>
+      </div>
+      <p>
+        Explore our gallery to see a selection of our most captivating creations, each one designed to inspire and elevate your personal style. Our pieces are more than jewelry—they are expressions of passion, artistry, and individuality.
+      </p>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 Jewelry Store. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

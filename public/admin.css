@@ -1,0 +1,152 @@
+/* admin.css */
+
+/* Define color variables */
+:root {
+    --primary-color: #FFFFF0;       /* Ivory */
+    --accent-color: #9b2d30;         /* Reddish accent */
+    --secondary-color: #F2F2F2;      /* Light gray for backgrounds */
+    --text-color: #333;
+    --header-bg: #9b2d30;
+    --header-text: #FFFFF0;
+    --link-color: #fdfdfd;
+}
+  
+  /* Reset some default styling */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Body styling */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+  
+
+  /* Пример стилей для header */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--accent-color);
+    padding: 10px 20px;
+  }
+  
+  .header-container .logo h1 {
+    margin: 0;
+    color: var(--primary-color);
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin-left: 20px;
+  }
+  
+  nav ul li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* Header styling */
+  .header {
+    background-color: var(--header-bg);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .header .logo h1 {
+    color: var(--header-text);
+    font-size: 2.2em;
+  }
+  
+ 
+  .header nav ul li a:hover {
+    color: var(--secondary-color);
+  }
+  
+  /* Main container */
+  .container {
+    max-width: 1200px;
+    margin: 20px auto 80px;  /* bottom margin adjusted to avoid footer overlap */
+    padding: 0 20px;
+  }
+  
+  /* Admin Panel Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  table, th, td {
+    border: 1px solid var(--accent-color);
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+  }
+  
+  td {
+    background-color: var(--secondary-color);
+  }
+  
+  /* Forms Styling */
+  form {
+    margin: 10px 0;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: var(--header-bg);
+  }
+  
+  /* Footer styling */
+  footer {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 15px 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  

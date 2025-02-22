@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Users Management</title>
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+          <div class="logo">
+            <h1>Jewelry Store</h1>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/products">Products</a></li>
+              <% if (user) { %>
+                <% if (user.role === 'admin') { %>
+                  <li><a href="/admin/users">Admin Panel</a></li>
+                <% } else { %>
+                  <li><a href="/profile">Profile</a></li>
+                <% } %>
+                <li><a href="/signout">Sign Out</a></li>
+              <% } else { %>
+                <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/signin">Sign In</a></li>
+              <% } %>
+              <li><a href="/order" class="order-btn">Order</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+     
+
+  <div class="container">
+    <h1>Admin Panel - Users Management</h1>
+    <h2>Create New User</h2>
+    <form action="/admin/users/create" method="POST">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <select name="role" required>
+        <option value="customer">Customer</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button type="submit">Create User</button>
+    </form>
+    <h2>All Users</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+      <% users.forEach(user => { %>
+      <tr>
+        <td><%= user._id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td>
+          <form action="/admin/users/<%= user._id %>/update" method="POST">
+            <select name="role">
+              <option value="customer" <% if(user.role==='customer'){ %>selected<% } %>>Customer</option>
+              <option value="admin" <% if(user.role==='admin'){ %>selected<% } %>>Admin</option>
+            </select>
+            <button type="submit">Update</button>
+          </form>
+          <form action="/admin/users/<%= user._id %>/delete" method="POST" onsubmit="return confirm('Are you sure?');">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }); %>
+    </table>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 Jewelry Store. All rights reserved.</p>
+  </footer>
+</body>
+</html>

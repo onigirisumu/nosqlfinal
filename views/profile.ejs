@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Profile - Jewelry Store</title>
+  <link rel="stylesheet" href="/profile.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>Jewelry Store</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <% if (user) { %>
+            <% if (user.role === 'admin') { %>
+              <li><a href="/admin/users">Admin Panel</a></li>
+            <% } else { %>
+              <li><a href="/profile">Profile</a></li>
+            <% } %>
+            <li><a href="/signout">Sign Out</a></li>
+          <% } else { %>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/signin">Sign In</a></li>
+          <% } %>
+          <li><a href="/order" class="order-btn">Order</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  
+  <!-- Profile Container -->
+  <div class="container profile-container">
+    <h2>Your Profile</h2>
+    
+    
+    <!-- Profile Details Form -->
+    <div class="profile-details">
+      <form action="/profile/update" method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" value="<%= user.name %>" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="<%= user.email %>" required>
+        </div>
+        <div class="form-group">
+          <label for="password">New Password:</label>
+          <input type="password" id="password" name="password" placeholder="Leave blank to keep current">
+        </div>
+        <button type="submit" class="update-btn">Update Profile</button>
+      </form>
+    </div>
+    
+    <!-- Posts Section -->
+    <div class="profile-posts">
+      <h3>Your Posts</h3>
+      <form action="/profile/post" method="POST" class="post-form">
+        <textarea name="content" placeholder="What's on your mind?" required></textarea>
+        <button type="submit" class="update-btn">Post</button>
+      </form>
+      
+      <ul class="posts-list">
+        <% posts.forEach(post => { %>
+          <li class="post-item">
+            <p><%= post.content %></p>
+            <small>Posted on <%= new Date(post.createdAt).toLocaleString() %></small>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 Jewelry Store. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

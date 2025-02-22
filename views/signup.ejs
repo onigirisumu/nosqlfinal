@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Jewelry Store</title>
+  <link rel="stylesheet" href="/signup.css">
+  <style>
+    /* Message Box CSS */
+    #messageBox {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      background-color: var(--accent-color);
+      color: var(--primary-color);
+      padding: 15px 25px;
+      border-radius: 5px;
+      font-weight: bold;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+          <div class="logo">
+            <h1>Jewelry Store</h1>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/products">Products</a></li>
+              <% if (user) { %>
+                <% if (user.role === 'admin') { %>
+                  <li><a href="/admin/users">Admin Panel</a></li>
+                <% } else { %>
+                  <li><a href="/profile">Profile</a></li>
+                <% } %>
+                <li><a href="/signout">Sign Out</a></li>
+              <% } else { %>
+                <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/signin">Sign In</a></li>
+              <% } %>
+              <li><a href="/order" class="order-btn">Order</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+  
+ 
+  <main>
+    <div class="container">
+      <h2>Sign Up</h2>
+      <form id="signupForm" action="/signup" method="POST">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" required>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" required>
+          <small id="passwordHint">Password must be at least 9 characters, include a number and a symbol.</small>
+        </div>
+        <div>
+          <button type="submit">Register</button>
+        </div>
+      </form>
+      <div class="auth-link">
+        <p>Already registered? <a href="/signin">Sign In</a></p>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Message Box -->
+  <div id="messageBox">Processing registration...</div>
+  
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 Jewelry Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Password validation feedback
+    document.getElementById('password').addEventListener('input', function() {
+      const password = this.value;
+      const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{9,})/;
+      const hint = document.getElementById('passwordHint');
+      if (!regex.test(password)) {
+        hint.style.color = 'red';
+      } else {
+        hint.style.color = 'green';
+      }
+    });
+
+    // Show message box on form submission
+    document.getElementById('signupForm').addEventListener('submit', function() {
+      document.getElementById('messageBox').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

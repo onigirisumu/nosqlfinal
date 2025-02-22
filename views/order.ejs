@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Order - Jewelry Store</title>
+  <link rel="stylesheet" href="/order.css">
+</head>
+<body>
+  <!-- Header (using dynamic navigation) -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>Jewelry Store</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <% if (user) { %>
+            <% if (user.role === 'admin') { %>
+              <li><a href="/admin/users">Admin Panel</a></li>
+            <% } else { %>
+              <li><a href="/profile">Profile</a></li>
+            <% } %>
+            <li><a href="/signout">Sign Out</a></li>
+          <% } else { %>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/signin">Sign In</a></li>
+          <% } %>
+          <li><a href="/order" class="order-btn">Order</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+    
+
+  <div class="container">
+    <h2>Your Cart</h2>
+    <% if (cart.length === 0) { %>
+      <p>Your cart is empty.</p>
+    <% } else { %>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let total = 0; %>
+          <% cart.forEach(item => { %>
+            <% const subtotal = item.product.price * item.quantity; %>
+            <% total += subtotal; %>
+            <tr>
+              <td><%= item.product.title %></td>
+              <td>$<%= item.product.price.toFixed(2) %></td>
+              <td>
+                <form action="/cart/update" method="POST" class="update-cart-form">
+                  <input type="hidden" name="productId" value="<%= item.product._id %>">
+                  <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
+                  <button type="submit">Update</button>
+                </form>
+              </td>
+              <td>$<%= subtotal.toFixed(2) %></td>
+              <td>
+                <form action="/cart/remove" method="POST">
+                  <input type="hidden" name="productId" value="<%= item.product._id %>">
+                  <button type="submit">Remove</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+          <tr>
+            <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+            <td colspan="2">$<%= total.toFixed(2) %></td>
+          </tr>
+        </tbody>
+      </table>
+      <form id="placeOrderForm">
+        <button type="submit">Place Order</button>
+      </form>
+    <% } %>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 Jewelry Store. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- В order.ejs -->
+
+
+<!-- Модальное окно -->
+<div id="orderModal" style="display:none; position:fixed; top:50%; left:50%; transform: translate(-50%, -50%);
+  background: #fff; padding: 20px; border: 1px solid #ccc;">
+  <p id="orderMessage"></p>
+  <button onclick="closeModal()">Close</button>
+</div>
+
+<script>
+document.getElementById('placeOrderForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  try {
+    const response = await fetch('/order/place', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+      // Если нужно, можно передать дополнительные данные здесь
+    });
+    const result = await response.json();
+    // Показываем модальное окно с сообщением
+    document.getElementById('orderMessage').textContent = result.message;
+    document.getElementById('orderModal').style.display = 'block';
+  } catch (error) {
+    console.error('Error placing order:', error);
+  }
+});
+
+function closeModal() {
+  document.getElementById('orderModal').style.display = 'none';
+}
+</script>
+
+</body>
+</html>

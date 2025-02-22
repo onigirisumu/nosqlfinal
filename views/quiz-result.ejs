@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Perfect Ring</title>
+  <link rel="stylesheet" href="/quiz.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>Jewelry Store</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <% if (user) { %>
+            <% if (user.role === 'admin') { %>
+              <li><a href="/admin/users">Admin Panel</a></li>
+            <% } else { %>
+              <li><a href="/profile">Profile</a></li>
+            <% } %>
+            <li><a href="/signout">Sign Out</a></li>
+          <% } else { %>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/signin">Sign In</a></li>
+          <% } %>
+          <li><a href="/order" class="order-btn">Order</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  
+  <div class="container">
+    <h2>Your Perfect Ring Recommendation</h2>
+    <p><strong>Metal:</strong> <%= quizResult.metal %></p>
+    <p><strong>Style:</strong> <%= quizResult.style %></p>
+    <p><strong>Gemstone:</strong> <%= quizResult.gemstone %></p>
+    <p>Based on your inputs, this ring perfectly matches your style!</p>
+    <a href="/products" class="submit-btn">Browse Similar Rings</a>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 Jewelry Store. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

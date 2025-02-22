@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Perfect Ring</title>
+  <link rel="stylesheet" href="/quiz.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>Jewelry Store</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Products</a></li>
+          <% if (user) { %>
+            <% if (user.role === 'admin') { %>
+              <li><a href="/admin/users">Admin Panel</a></li>
+            <% } else { %>
+              <li><a href="/profile">Profile</a></li>
+            <% } %>
+            <li><a href="/signout">Sign Out</a></li>
+          <% } else { %>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/signin">Sign In</a></li>
+          <% } %>
+          <li><a href="/order" class="order-btn">Order</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- Quiz Container -->
+  <div class="container quiz-container">
+    <h2>Find Your Perfect Ring</h2>
+    <form action="/quiz-result" method="POST">
+      <!-- Skin Tone -->
+      <div class="quiz-question">
+        <label for="skinTone">What's your skin tone?</label>
+        <select name="skinTone" id="skinTone" required>
+          <option value="">Select your skin tone</option>
+          <option value="light">Light</option>
+          <option value="medium">Medium</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+      <!-- Vibes/Style -->
+      <div class="quiz-question">
+        <label for="vibe">What best describes your style?</label>
+        <select name="vibe" id="vibe" required>
+          <option value="">Select your style</option>
+          <option value="classic">Classic</option>
+          <option value="modern">Modern</option>
+          <option value="edgy">Edgy</option>
+          <option value="romantic">Romantic</option>
+        </select>
+      </div>
+      <!-- Zodiac Sign -->
+      <div class="quiz-question">
+        <label for="zodiac">What's your zodiac sign?</label>
+        <select name="zodiac" id="zodiac" required>
+          <option value="">Select your zodiac</option>
+          <option value="aries">Aries</option>
+          <option value="taurus">Taurus</option>
+          <option value="gemini">Gemini</option>
+          <option value="cancer">Cancer</option>
+          <option value="leo">Leo</option>
+          <option value="virgo">Virgo</option>
+          <option value="libra">Libra</option>
+          <option value="scorpio">Scorpio</option>
+          <option value="sagittarius">Sagittarius</option>
+          <option value="capricorn">Capricorn</option>
+          <option value="aquarius">Aquarius</option>
+          <option value="pisces">Pisces</option>
+        </select>
+      </div>
+      <!-- Additional Style Details -->
+      <div class="quiz-question">
+        <label for="vibeDetail">Any additional style details? (Optional)</label>
+        <input type="text" name="vibeDetail" id="vibeDetail" placeholder="e.g., minimalistic, bohemian">
+      </div>
+      <button type="submit" class="submit-btn">See My Perfect Ring</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2025 Jewelry Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Include client-side JS -->
+  <script src="/quiz.js"></script>
+</body>
+</html>
